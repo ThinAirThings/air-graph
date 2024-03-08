@@ -13,7 +13,7 @@ export const createNodeType = <
         updateNode,
         deleteNode
     }: {
-        createNode: (baseProps: AirNode<any>, extProps: P ) => Promise<string>,
+        createNode: (baseProps: AirNode<any>, extProps: P ) => Promise<void>,
         getNode: (nodeId: string) => Promise<AirNode<T, P>>
         updateNode: (nodeId: string, props: P) => Promise<void>
         deleteNode: (nodeId: string) => Promise<void>
