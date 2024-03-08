@@ -1,0 +1,29 @@
+{
+    "name": "@thinairthings/air-dynamodb",
+    "version": "0.1.13",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsup",
+        "npmpub": "npm run build && git add . && git commit -m \"mod\" && git push && npm version patch && npm publish --access public",
+        "format": "npx prettier --write ."
+    },
+    "files": [
+        "dist"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ThinAirThings/air-dynamodb.git"
+    },
+    "devDependencies": {
+        "@types/node": "20.6.3",
+        "@types/uuid": "^9.0.8",
+        "tsup": "^7.2.0",
+        "typescript": "~5.2.2"
+    },
+    "keywords": [],
+    "author": "Dan Lannan",
+    "dependencies": {
+        "uuid": "^9.0.1"
+    }
+}
