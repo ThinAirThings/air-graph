@@ -12,10 +12,13 @@ export const createGraphType = <
     EIdx extends {
         [T in string]: ReturnType<typeof createEdgeType<any, any>>
     },
->(
-    nodeTypes: NIdx,
-    edgeTypes: EIdx
-) => {
+>({
+    nodeIndex,
+    edgeIndex
+} : {
+    nodeIndex: NIdx,
+    edgeIndex: EIdx
+}) => {
     const edgeFunctions = {
         createEdge: async <T extends keyof EIdx>(
             edgeType: T,
@@ -23,7 +26,7 @@ export const createGraphType = <
             toNodeId: string,
             props: Parameters<EIdx[T]['createEdge']>[1]
         ) => {
-            await edgeTypes[edgeType].createEdge({
+            await edgeIndex[edgeType].createEdge({
                 edgeType,
                 fromNodeId,
                 toNodeId, 
@@ -39,7 +42,7 @@ export const createGraphType = <
             fromNodeId: string,
             toNodeId: string
         ) => {
-            return (await edgeTypes[edgeType].getEdge({
+            return (await edgeIndex[edgeType].getEdge({
                 fromNodeId,
                 toNodeId
             })) as AirEdge<T, Parameters<EIdx[T]['createEdge']>[1]>
@@ -51,7 +54,7 @@ export const createGraphType = <
             props: Parameters<NIdx[T]['createNode']>[1]
         ) => {
             const nodeId = uuidv4()
-            await nodeTypes[nodeType].createNode({
+            await nodeIndex[nodeType].createNode({
                 nodeId,
                 nodeType,
                 createdAt: new Date().toISOString()
@@ -76,7 +79,7 @@ export const createGraphType = <
             nodeType: T,
             nodeId: string
         ) => {
-            return (await nodeTypes[nodeType].getNode(nodeId)) as AirNode<T, Parameters<NIdx[T]['createNode']>[1]>
+            return (await nodeIndex[nodeType].getNode(nodeId)) as AirNode<T, Parameters<NIdx[T]['createNode']>[1]>
         },
     }
 }

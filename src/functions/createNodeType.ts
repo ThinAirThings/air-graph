@@ -1,7 +1,6 @@
 import { AirNode } from "../types/AirNode"
 
 
-
 export const createNodeType = <
     T extends string, 
     P extends Record<string, any>=Record<string, any>
