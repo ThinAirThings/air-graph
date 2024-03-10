@@ -10,9 +10,14 @@ export const createEdgeType = <
         createEdge,
         getEdge,
         updateEdge,
-        deleteEdge
     }: {
-        createEdge: (baseProps: AirEdge<any>, extProps: P ) => Promise<string>,
+        createEdge: (
+            baseProps: AirEdge<any>, 
+            extProps: P 
+        ) => Promise<(
+            fromNodeId: string,
+            toNodeId: string
+        ) => Promise<void>>,
         getEdge: ({
             fromNodeId,
             toNodeId
@@ -21,7 +26,6 @@ export const createEdgeType = <
             toNodeId: string
         }) => Promise<AirEdge<T, P>>
         updateEdge?: (props: P) => Promise<void>
-        deleteEdge?: (edgeId: string) => Promise<void>
     }
 ) => {
     return {
@@ -29,6 +33,5 @@ export const createEdgeType = <
         createEdge,
         getEdge,
         updateEdge,
-        deleteEdge
     }
 }

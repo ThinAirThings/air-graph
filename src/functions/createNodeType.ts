@@ -14,7 +14,9 @@ export const createNodeType = <
         createNode: (
             baseProps: AirNode<any>, 
             extProps: P 
-        ) => Promise<(nodeId: string) => Promise<void>>,
+        ) => Promise<
+            (nodeId: string) => Promise<void>
+        >,
         getNode: (nodeId: string) => Promise<AirNode<T, P>>
         updateNode?: (nodeId: string, props: P) => Promise<void>
     }
