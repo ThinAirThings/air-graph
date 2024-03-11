@@ -47,6 +47,12 @@ export const createGraphType = <
                 toNodeId
             })) as AirEdge<T, Parameters<EIdx[T]['createEdge']>[1]>
         },
+        deleteEdge: async <T extends (keyof EIdx&string)>(
+            edgeType: T,
+            adjacentNodeId: string
+        ) => {
+            await edgeIndex[edgeType].deleteEdge(adjacentNodeId)
+        }
     }
     return {
         createNode: async <T extends keyof NIdx>(
@@ -81,5 +87,6 @@ export const createGraphType = <
         ) => {
             return (await nodeIndex[nodeType].getNode(nodeId)) as AirNode<T, Parameters<NIdx[T]['createNode']>[1]>
         },
+
     }
 }

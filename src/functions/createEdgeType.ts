@@ -8,16 +8,15 @@ export const createEdgeType = <
     edgeType: T, 
     {
         createEdge,
+        deleteEdge,
         getEdge,
         updateEdge,
     }: {
         createEdge: (
             baseProps: AirEdge<any>, 
             extProps: P 
-        ) => Promise<(
-            fromNodeId: string,
-            toNodeId: string
-        ) => Promise<void>>,
+        ) => Promise<void>,
+        deleteEdge: (adjacentNodeId: string) => Promise<void>,
         getEdge: ({
             fromNodeId,
             toNodeId
@@ -31,6 +30,7 @@ export const createEdgeType = <
     return {
         edgeType,
         createEdge,
+        deleteEdge,
         getEdge,
         updateEdge,
     }
