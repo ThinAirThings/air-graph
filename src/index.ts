@@ -5,3 +5,4 @@
 // export { createNodeType } from "./functions/createNodeType";
 // export { AirEdge } from "./types/AirEdge"
 export { AirNode } from "./types/AirNode"
+export { AirTree } from "./types/AirTree"
