@@ -12,8 +12,5 @@ export type AirTree<T extends AirNode<any, any>[]> = Head<T>
         ?  { 
             children: Map<string, AirTree<Tail<T>>>
         }
-        : {})
-
-
-
-// type Thing2 = Thing | never
+        : Record<string, never>
+    )
