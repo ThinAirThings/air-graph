@@ -28,3 +28,4 @@ type Thing2 = Thing & EmptyObject
 const obj: Thing2 = {
     name: "hello",
 }
+
