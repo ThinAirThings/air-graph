@@ -7,10 +7,24 @@ import { HasTail, Head, Tail } from "./utlity"
 //         : Partial<never>
 // }
 
+const emptySymbol = Symbol('EmptyObject type')
+type EmptyObject = {[emptySymbol]?: never}
+
 export type AirTree<T extends AirNode<any, any>[]> = Head<T> 
     & (HasTail<T> extends true 
         ?  { 
             children: Map<string, AirTree<Tail<T>>>
         }
-        : Record<string, never>
+        : EmptyObject
     )
+
+
+type Thing = {
+    name: string
+}
+
+type Thing2 = Thing & EmptyObject
+
+const obj: Thing2 = {
+    name: "hello",
+}
