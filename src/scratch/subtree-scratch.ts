@@ -32,9 +32,9 @@ type SearchTree = Subtree<[SearchNode, MessageNode, DemoResultNode]>
 
 const obj = null as unknown as AirTree<[SearchNode, MessageNode, DemoResultNode]>;
 
-[...obj.children].map(([key, node]) => {
+Object.entries(obj.children).map(([key, node]) => {
     node.nodeType;
-    [...node.children].map(([key, node]) => {
+    Object.entries(node.children).map(([key, node]) => {
         node.nodeType
     })
 })
