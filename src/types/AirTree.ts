@@ -8,11 +8,11 @@ import { HasTail, Head, Tail } from "./utlity"
 // }
 
 export type AirTree<T extends AirNode<any, any>[]> = Head<T> 
-    & HasTail<T> extends true 
+    & (HasTail<T> extends true 
         ?  { 
             children: Map<string, AirTree<Tail<T>>>
         }
-        : {}
+        : {})
 
 
 

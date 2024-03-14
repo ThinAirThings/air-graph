@@ -1,36 +1,40 @@
-// type SearchStoreState = {
-//     searchId: string
-//     messageMap: Map<string, MessageNode>;
-//     resultMap: Map<string, Map<string, DemoResultNode>>;
-// }
+import { DemoResultNode, MessageNode, SearchNode } from "@grantgraph/types";
+import { AirNode } from "../types/AirNode";
+import { AirTree } from "../types/AirTree";
 
-// const data = null as unknown as SearchStoreState;
+type SearchStoreState = {
+    searchId: string
+    messageMap: Map<string, MessageNode>;
+    resultMap: Map<string, Map<string, DemoResultNode>>;
+}
 
-// [...data.messageMap].map(([key, value]) => {
-//     console.log(value);
-//     [...data.resultMap.get(key)??[]]?.map(([key, value]) => {
-//         console.log(value);
-//     })
-// })
+const data = null as unknown as SearchStoreState;
 
-// export type Head<T extends any[]> = T extends [any, ...any[]] ? T[0] : never;
-// export type HasHead<T extends any[]> = T extends [] ? false : true;
-// export type Tail<T extends any[]> = ((...t: T) => any) extends (h: any, ...r: infer R) => any ? R : never;
-// export type HasTail<T extends any[]> = T extends ([] | [any]) ? false : true;
+[...data.messageMap].map(([key, value]) => {
+    console.log(value);
+    [...data.resultMap.get(key)??[]]?.map(([key, value]) => {
+        console.log(value);
+    })
+})
 
-// type Subtree<T extends AirNode<any, any>[]> = Head<T> & { 
-//     children: HasTail<T> extends true 
-//         ? Map<string, Subtree<Tail<T>>> 
-//         : never
-// }
+export type Head<T extends any[]> = T extends [any, ...any[]] ? T[0] : never;
+export type HasHead<T extends any[]> = T extends [] ? false : true;
+export type Tail<T extends any[]> = ((...t: T) => any) extends (h: any, ...r: infer R) => any ? R : never;
+export type HasTail<T extends any[]> = T extends ([] | [any]) ? false : true;
 
-// type SearchTree = Subtree<[SearchNode, MessageNode, DemoResultNode]>
+type Subtree<T extends AirNode<any, any>[]> = Head<T> & { 
+    children: HasTail<T> extends true 
+        ? Map<string, Subtree<Tail<T>>> 
+        : never
+}
 
-// const obj = null as unknown as SearchTree;
+type SearchTree = Subtree<[SearchNode, MessageNode, DemoResultNode]>
 
-// [...obj.children].map(([key, node]) => {
-//     node.nodeType;
-//     [...node.children].map(([key, node]) => {
-//         node.nodeType
-//     })
-// })
+const obj = null as unknown as AirTree<[SearchNode, MessageNode, DemoResultNode]>;
+
+[...obj.children].map(([key, node]) => {
+    node.nodeType;
+    [...node.children].map(([key, node]) => {
+        node.nodeType
+    })
+})
