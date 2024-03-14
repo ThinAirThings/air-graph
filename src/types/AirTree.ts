@@ -19,10 +19,10 @@ type EmptyObject = {[emptySymbol]?: never}
 //     )
 
 export type AirTree<T extends AirNode<any, any>[]> = HasTail<T> extends true 
-    ? Head<T> & {
+    ? (Head<T> & {
         children: Map<string, AirTree<Tail<T>>>
-    }
-    : Head<T>
+    })
+    : (Head<T>)
 
 
 // type Thing = {
