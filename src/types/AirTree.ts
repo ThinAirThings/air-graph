@@ -15,7 +15,7 @@ export type AirTree<T extends AirNode<any, any>[]> = Head<T>
         ?  { 
             children: Map<string, AirTree<Tail<T>>>
         }
-        : EmptyObject
+        : object
     )
 
 
