@@ -20,12 +20,10 @@ export const airTreeToMappedAirTree = <T extends AirNode<any, any>[]>(tree: AirT
         return tree as MappedAirTree<any>;
     }
     const mappedChildren = new Map<string, MappedAirTree<any>>();
-    Object.entries(tree.children).map(([key, value]) => {
+    Object.entries(tree.children).sort((a, b) => (a[1] as any).createdAt > (b[1] as any).createdAt ? 1 : -1).map(([key, value]) => {
         mappedChildren.set(key, airTreeToMappedAirTree<any>(value));
     });
     // Sort map by createdAt property
-
-    [...mappedChildren].sort((a, b) => a[1].createdAt > b[1].createdAt ? 1 : -1);
     return {
         ...tree,
         children: mappedChildren
