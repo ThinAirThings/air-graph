@@ -6,3 +6,4 @@
 // export { AirEdge } from "./types/AirEdge"
 export { AirNode } from "./types/AirNode"
 export * from "./types/AirTree"
+export * from "./types/MappedAirTree"
