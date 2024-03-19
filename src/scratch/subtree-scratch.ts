@@ -1,6 +1,6 @@
-import { DemoResultNode, MessageNode, SearchNode } from "@grantgraph/types";
-import { AirNode } from "../types/AirNode";
-import { AirTree } from "../types/AirTree";
+// import { DemoResultNode, MessageNode, SearchNode } from "@grantgraph/types";
+import { AirGraph, LinearBidirectionalAirGraph } from "../types/AirGraph";
+import { AirNodev2 } from "../types/AirNodev2";
 
 type SearchStoreState = {
     searchId: string
@@ -12,29 +12,65 @@ const data = null as unknown as SearchStoreState;
 
 [...data.messageMap].map(([key, value]) => {
     console.log(value);
-    [...data.resultMap.get(key)??[]]?.map(([key, value]) => {
+    [...data.resultMap.get(key) ?? []]?.map(([key, value]) => {
         console.log(value);
     })
 })
 
-export type Head<T extends any[]> = T extends [any, ...any[]] ? T[0] : never;
-export type HasHead<T extends any[]> = T extends [] ? false : true;
-export type Tail<T extends any[]> = ((...t: T) => any) extends (h: any, ...r: infer R) => any ? R : never;
-export type HasTail<T extends any[]> = T extends ([] | [any]) ? false : true;
 
-type Subtree<T extends AirNode<any, any>[]> = Head<T> & { 
-    children: HasTail<T> extends true 
-        ? Map<string, Subtree<Tail<T>>> 
-        : never
-}
 
-type SearchTree = Subtree<[SearchNode, MessageNode, DemoResultNode]>
+// const obj = null as unknown as AirTree<[SearchNode, MessageNode, DemoResultNode, SearchNode, MessageNode]>;
 
-const obj = null as unknown as AirTree<[SearchNode, MessageNode, DemoResultNode]>;
 
-Object.entries(obj.children).map(([key, node]) => {
+// // In JS Object == Node
+// Object.entries(obj.children).map(([key, node]) => {
+//     node.nodeType;
+//     Object.entries(node.children).map(([key, node]) => {
+//         node.nodeType
+
+//         Object.entries(node.children).map(([key, node]) => {
+//             node.nodeType
+//             Object.entries(node.children).map(([key, node]) => {
+//                 node.nodeType
+//             })
+//         })
+//     })
+// })
+
+type UserNode = AirNodev2<'user', {
+    name: string;
+    age: number;
+    email: string;
+    phone: string;
+    address: string;
+}>;
+type SearchNode = AirNodev2<'search', {
+    searchId: string;
+    searchQuery: string;
+}>;
+type MessageNode = AirNodev2<'message', {
+    message: string;
+    messageId: string;
+}>;
+type ResultNode = AirNodev2<'result', {
+    resultId: string;
+    result: string;
+}>;
+const lbdGraph = null as unknown as AirGraph<UserNode, [SearchNode, MessageNode, ResultNode]>;
+Object.entries(lbdGraph.children).map(([key, node]) => {
     node.nodeType;
+    node.parent
+
     Object.entries(node.children).map(([key, node]) => {
         node.nodeType
+        Object.entries(node.children).map(([key, node]) => {
+            node.nodeType
+            node.parent.nodeType
+            node.parent.parent.nodeType
+            node.parent.parent.parent.nodeType
+            Object.entries(node.children).map(([key, node]) => {
+                node.nodeType
+            })
+        })
     })
 })
