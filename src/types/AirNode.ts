@@ -18,11 +18,15 @@ export const createZodNode = <
     PT extends ZodLiteral<any> | ZodNull,
     T extends ZodLiteral<any>,
     P extends ZodObject<any>
->(
+>({
+    parentNodeType,
+    nodeType,
+    properties,
+}: {
     parentNodeType: PT,
     nodeType: T,
     properties: P
-) => z.object({
+}) => z.object({
     parentNodeType,
     parentNodeId: z.string(),
     nodeType,
