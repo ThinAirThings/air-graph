@@ -11,9 +11,6 @@ export type MappedAirTree<T extends AirNode<any, any>[]> = HasTail<T> extends tr
     : (Head<T>)
 
 
-type TestTree = AirTree<[SearchNode, MessageNode, ResultNode]>
-
-const testTree = null as unknown as TestTree;
 
 export const airTreeToMappedAirTree = <T extends AirNode<any, any>[]>(tree: AirTree<T>): MappedAirTree<T> => {
     if (Object.keys(tree.children).length === 0) {
@@ -30,6 +27,5 @@ export const airTreeToMappedAirTree = <T extends AirNode<any, any>[]>(tree: AirT
     }
 }
 
-const mappedTree = airTreeToMappedAirTree<[SearchNode, MessageNode, ResultNode]>(testTree);
 
 
