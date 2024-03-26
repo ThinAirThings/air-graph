@@ -28,7 +28,7 @@ export const createZodNode = <
     properties: P
 }) => z.object({
     parentNodeType,
-    parentNodeId: z.string(),
+    parentNodeId: z.union([z.string(), z.null()]),
     nodeType,
     nodeId: z.string(),
     createdAt: z.string(),
